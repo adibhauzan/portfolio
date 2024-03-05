@@ -9,7 +9,7 @@ export const Bio = {
     "Fresh Graduate students at the University of Logistics and International Business major in informatics engineering. Want to be able to work as a team to complete projects and be able to solve problems with the team. Interested in programming and learning new things. Committed to achieving project goals with strong programming skills and the ability to adapt to new technologies. With a background in IT, I possess specialized skills in programming using Golang and PHP. Proficient in managing both SQL and NoSQL databases, I also have expertise in using Docker for efficient containerization processes. I have a combination of academic proficiency, practical experience in the IT field, and specific skills in backend development, showcasing a competitive and dynamic professional in this field.",
   github: "https://github.com/adibhauzan",
   resume:
-    "https://drive.google.com/file/d/123iJ7S3j-LE7HY4_JDH0D6HbgPPNLRHE/view?usp=sharing",
+    "https://drive.google.com/file/d/1ByLgTFukTHxDZBiUBGdkUUjgw_GG5nun/view?usp=sharing",
   linkedin: "https://www.linkedin.com/in/adib-hauzan-3b7772254/",
   twitter: "https://twitter.com/",
   insta: "https://www.instagram.com/adibhauzan_/",
