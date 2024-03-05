@@ -224,7 +224,7 @@ export const projects = [
     id: 9,
     title: "JPO - ERP System",
     date: "Jul 2023 - Aug 2023",
-    description: "JPO (Online Bookkeeping Service) is an ERP system tailored specifically for the textile industry. It is designed to streamline inventory management, production processes, order tracking, financial management, and data analytics. By focusing on these key areas, JPO aims to enhance efficiency and responsiveness within textile companies. While still in the development phase, we are dedicated to further improving its functionality prior to the official launch, by carefully considering and incorporating feedback from beta users. We sincerely appreciate your ongoing support.",
+    description: "JPO is an ERP system tailored specifically for the textile industry. It is designed to streamline inventory management, production processes, order tracking, financial management, and data analytics. By focusing on these key areas, JPO aims to enhance efficiency and responsiveness within textile companies. While still in the development phase, we are dedicated to further improving its functionality prior to the official launch, by carefully considering and incorporating feedback from beta users. We sincerely appreciate your ongoing support.",
     image:
       "https://firebasestorage.googleapis.com/v0/b/peaceful-impact-403104.appspot.com/o/jpo.png?alt=media&token=78b33a84-f5dd-4e78-93cb-a792bf20ff59",
     tags: [
