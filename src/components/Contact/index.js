@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useRef } from 'react';
+import React, { useRef, useState } from 'react'; // Import useState
+import emailjs from '@emailjs/browser';
+import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
 const Container = styled.div`
@@ -121,90 +121,58 @@ const ContactButton = styled.input`
 
 
 
-
 const Contact = () => {
-
-  //hooks
-  const [emailFrom, setEmailFrom] = React.useState("");
-  const [emailSubject, setEmailSubject] = React.useState("");
-  const [emailMessage, setEmailMessage] = React.useState("");
-  const [emailName, setEmailName] = React.useState("");
+  (function(){
+    emailjs.init("tYWTLGimYlzOgx5ih"); 
+})();
   const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
 
-  
-  
-  
-  
-  const handleSubmit = async(e) => {
-    
-    e.preventDefault();
-    const dataSend = {
-      "from": emailFrom,
-      "subject": emailSubject,
-      "message": `Pesan Dari ${emailName} : \n${emailMessage}` 
-    };
-    try {
-      Swal.fire({
-        title: "Sending Email....",
-        html: "<strong>An email will be sent to Argya Rijal Rafi, and will be replied to as soon as possible.</strong>",
-        timerProgressBar:true,
-        didOpen: () => {
-          Swal.showLoading()
-        }
-      });
-      const response = await fetch("https://send-email01.fly.dev/send", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataSend)
-      });
-  
-      if (!response.ok) {
-        Swal.close();
-        Swal.fire({
-          title: "Failure !!",
-          text: "Something Went Wrong",
-          icon: "error"
-        })
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      try {
+          await emailjs.sendForm('service_8b06xdf', 'template_umcag38', form.current
+              // from_email: form.current.from_email.value,
+              // from_subject: form.current.subject.value,
+              // from_name: form.current.from_name.value,
+              // message: form.current.message.value
+          );
+
+          Swal.fire({
+              title: "Success!",
+              text: "Your message has been sent successfully.",
+              icon: "success"
+          });
+      } catch (error) {
+          Swal.fire({
+              title: "Error!",
+              text: "Failed to send message. Please try again later.",
+              icon: "error"
+          });
+          console.error("Error sending email:", error);
+      } finally {
+          setLoading(false);
+          // form.current.reset();
       }
-  
-      const responseData = await response.json();
-      console.log(responseData);
-      Swal.close();
-      Swal.fire({
-        title: "Success !!",
-        text: response.message,
-        icon: "success"
-      })
-    } catch (error) {
-      Swal.close();
-      Swal.fire({
-        title: "Failure !!",
-        text: error,
-        icon: "error"
-      })
-      console.error(error);
-    }
-  }
+  };
 
   return (
-    <Container>
-      <Wrapper>
-        <Title>Contact</Title>
-        <Desc>Feel free to reach out to me for any questions or opportunities!</Desc>
-        <ContactForm ref={form} onSubmit={handleSubmit}>
-          <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput onChange={(event) => {setEmailFrom(event.target.value)}} placeholder="Your Email" name="from_email" />
-          <ContactInput onChange={(e) => {setEmailName(e.target.value)}} placeholder="Your Name" name="from_name" />
-          <ContactInput onChange={(e) => {setEmailSubject(e.target.value)}} placeholder="Subject" name="subject" />
-          <ContactInputMessage onChange={(e) => {setEmailMessage(e.target.value)}} placeholder="Message" rows="4" name="message" />
-          <ContactButton onClick={(e) => handleSubmit(e)} type="submit" value="Send" />
-        </ContactForm>
-      </Wrapper>
-    </Container>
-  )
-}
+      <Container>
+          <Wrapper>
+              <Title>Contact</Title>
+              <Desc>Feel free to reach out to us for any questions or opportunities!</Desc>
+              <ContactForm ref={form} onSubmit={handleSubmit}>
+                  <ContactTitle>Email Us 🚀</ContactTitle>
+                  <ContactInput type="text" name="from_name" placeholder="Your Name" required />
+                  <ContactInput type="email" name="from_email" placeholder="Your Email" required />
+                  <ContactInput type="text" name="subject" placeholder="Subject" required />
+                  <ContactInputMessage name="message" placeholder="Your Message" rows="4" required />
+                  <ContactButton type="submit" value="Send" disabled={loading} />
+              </ContactForm>
+          </Wrapper>
+      </Container>
+  );
+};
 
 export default Contact
